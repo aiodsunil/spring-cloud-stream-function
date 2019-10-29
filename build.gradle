@@ -1,32 +1,37 @@
 plugins {
     id 'base'
     id 'java'
+    id "net.ltgt.apt-idea" apply false
 }
 
 ext {
     springBootVersion = '2.2.0.RELEASE'
-    springCloudVersion = 'Hoxton.M3'
+    springCloudVersion = 'Hoxton.BUILD-SNAPSHOT'
 }
 
-version = "1.0.0.BUILD-SNAPSHOT"
-group = "spring.example"
+subprojects {
+    apply plugin: 'java'
 
-clean {
-    delete 'out'
-}
+    version = "1.0.0.BUILD-SNAPSHOT"
+    group = "spring.example"
 
-repositories {
-    jcenter()
-    mavenCentral()
+    clean {
+        delete 'out'
+    }
 
-    maven { url "http://repo.spring.io/libs-release" }
-    maven { url "http://repo.spring.io/libs-milestone" }
-    maven { url "http://repo.spring.io/libs-snapshot" }
-}
+    repositories {
+        jcenter()
+        mavenCentral()
 
-dependencies {
-    implementation platform("org.springframework.boot:spring-boot-dependencies:${springBootVersion}")
-    implementation platform("org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}")
+        maven { url "http://repo.spring.io/libs-release" }
+        maven { url "http://repo.spring.io/libs-milestone" }
+        maven { url "http://repo.spring.io/libs-snapshot" }
+    }
 
-    implementation 'org.springframework.cloud:spring-cloud-starter-stream-kafka'
+    dependencies {
+        implementation platform("org.springframework.boot:spring-boot-dependencies:${springBootVersion}")
+        implementation platform("org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}")
+
+        implementation 'org.springframework.cloud:spring-cloud-starter-stream-kafka'
+    }
 }

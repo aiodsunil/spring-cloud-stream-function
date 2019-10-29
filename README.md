@@ -2,14 +2,13 @@
 
 ### What is done
 
-Attempt to use Spring Cloud Stream Hoxton.M3 and functional support together with Kafka Binder. There is a processor 
-`Function<Flux<Message<String>>, Flux<Message<String>>>` which suppose to use dynamic output destination based on
-`Message` header. 
+Attempt to use Spring Cloud Stream Hoxton.BUILD-SNAPSHOT and functional support together with Kafka Binder. There is a 
+consumer implementation class which suppose to be discovered by spring cloud stream and provide data.
 
-The following option is set: `spring.cloud.stream.kafka.bindings.output.producer.use-topic-header=true` in 
-`application.properties` file and for each message target topic is specified via message header `KafkaHeaders.TOPIC`.
+Consumer is discovered by an exception is thrown:
 
-### The Problem
-
-The problem is that producer still send data to pre-defined `output_topic`. It's not clear if that is supported or not
-by the functional approach.
+```
+Caused by: java.lang.ClassCastException: class java.lang.String cannot be cast to class reactor.core.publisher.Flux 
+(java.lang.String is in module java.base of loader 'bootstrap'; reactor.core.publisher.Flux is in unnamed module of 
+loader 'app')
+```

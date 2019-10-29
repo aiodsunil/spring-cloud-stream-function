@@ -1,5 +1,13 @@
 pluginManagement {
     plugins {
-        id "org.springframework.boot" version "2.2.0.RELEASE"
+        id "net.ltgt.apt-idea" version "0.21"
     }
+}
+
+include 'commons'
+include 'producer'
+include 'consumer'
+
+rootProject.children.each {
+    it.buildFileName = "${it.name}.gradle"
 }
